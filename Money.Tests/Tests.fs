@@ -7,7 +7,7 @@ open FsUnit.Xunit
 //Ideas
 //$5 + 10 CHF = $10 if rate is 2:1
 //$5 * 2 = $10 -> done
-//Make "amount" private
+//Make "amount" private -> in progress
 //Dollar side-effects -> done
 //Money rounding?
 //Equals() -> done
@@ -20,10 +20,12 @@ open FsUnit.Xunit
 let ``Test multiplication`` () =
     let fiveDollars = Dollar(5)
     let tenDollars = fiveDollars.Times(2)
-    tenDollars.Amount |> should equal 10
+    let expectedTenDollars = Dollar(10)
+    tenDollars |> should equal expectedTenDollars
     
     let fifteenDollars = fiveDollars.Times(3)
-    fifteenDollars.Amount |> should equal 15
+    let expectedFifteenDollars = Dollar(15)
+    fifteenDollars |> should equal expectedFifteenDollars
     
 [<Fact>]
 let ``Test equality`` () =
