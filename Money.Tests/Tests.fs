@@ -19,13 +19,9 @@ open FsUnit.Xunit
 [<Fact>]
 let ``Test multiplication`` () =
     let fiveDollars = Dollar(5)
-    let tenDollars = fiveDollars.Times(2)
-    let expectedTenDollars = Dollar(10)
-    tenDollars |> should equal expectedTenDollars
     
-    let fifteenDollars = fiveDollars.Times(3)
-    let expectedFifteenDollars = Dollar(15)
-    fifteenDollars |> should equal expectedFifteenDollars
+    fiveDollars.Times(2) |> should equal (Dollar(10))
+    fiveDollars.Times(3) |> should equal (Dollar(15))
     
 [<Fact>]
 let ``Test equality`` () =
