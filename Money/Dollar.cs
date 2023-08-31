@@ -2,20 +2,20 @@ namespace Money;
 
 public class Dollar : IEquatable<Dollar>
 {
-    public int Amount { get; private set; }
+    private readonly int _amount;
 
     public Dollar(int amount)
     {
-        Amount = amount;
+        _amount = amount;
     }
 
-    public Dollar Times(int multiplier) => new(Amount * multiplier);
+    public Dollar Times(int multiplier) => new(_amount * multiplier);
 
     public bool Equals(Dollar? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return Amount == other.Amount;
+        return _amount == other._amount;
     }
 
     public override bool Equals(object? obj)
@@ -28,6 +28,6 @@ public class Dollar : IEquatable<Dollar>
 
     public override int GetHashCode()
     {
-        return Amount;
+        return _amount;
     }
 }
