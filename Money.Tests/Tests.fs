@@ -14,6 +14,7 @@ open FsUnit.Xunit
 //HashCode() -> done
 //Equal null -> done
 //Equal object -> done
+// 5 CSF * 2 = 20 CHF -> done
 
 
 [<Fact>]
@@ -22,6 +23,13 @@ let ``Test multiplication`` () =
     
     fiveDollars.Times(2) |> should equal (Dollar(10))
     fiveDollars.Times(3) |> should equal (Dollar(15))
+
+[<Fact>]
+let ``Test Franc multiplication`` () =
+    let fiveFrancs = Franc(5)
+    
+    fiveFrancs.Times(2) |> should equal (Franc(10))
+    fiveFrancs.Times(3) |> should equal (Franc(15))
     
 [<Fact>]
 let ``Test equality`` () =

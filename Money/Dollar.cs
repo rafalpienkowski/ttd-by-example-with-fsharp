@@ -31,3 +31,35 @@ public class Dollar : IEquatable<Dollar>
         return _amount;
     }
 }
+
+public class Franc : IEquatable<Franc>
+{
+    private readonly int _amount;
+
+    public Franc(int amount)
+    {
+        _amount = amount;
+    }
+    
+    public Franc Times(int multiplier) => new(_amount * multiplier);
+
+    public bool Equals(Franc? other)
+    {
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return _amount == other._amount;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != this.GetType()) return false;
+        return Equals((Franc)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return _amount;
+    }
+}
