@@ -1,4 +1,4 @@
-namespace Money;
+namespace Currency;
 
 public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
 {
@@ -10,6 +10,7 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
     }
 
     public static Dollar Dollar(int amount) => new(amount);
+    public static Franc Franc(int amount) => new(amount);
 
     public abstract Money Times(int multiplier);
 

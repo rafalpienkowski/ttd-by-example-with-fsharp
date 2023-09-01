@@ -1,6 +1,6 @@
 module ``Money tests``
 
-open Money
+open Currency
 open Xunit
 open FsUnit.Xunit
 
@@ -24,22 +24,22 @@ open FsUnit.Xunit
 let ``Test multiplication`` () =
     let fiveDollars: Money = Money.Dollar(5)
 
-    fiveDollars.Times(2) |> should equal (Dollar(10))
-    fiveDollars.Times(3) |> should equal (Dollar(15))
+    fiveDollars.Times(2) |> should equal (Money.Dollar(10))
+    fiveDollars.Times(3) |> should equal (Money.Dollar(15))
 
 [<Fact>]
 let ``Test Franc multiplication`` () =
-    let fiveFrancs: Money = Franc(5)
+    let fiveFrancs: Money = Money.Franc(5)
 
-    fiveFrancs.Times(2) |> should equal (Franc(10))
-    fiveFrancs.Times(3) |> should equal (Franc(15))
+    fiveFrancs.Times(2) |> should equal (Money.Franc(10))
+    fiveFrancs.Times(3) |> should equal (Money.Franc(15))
 
 [<Fact>]
 let ``Test equality`` () =
-    Dollar(5) |> should equal (Dollar(5))
-    Dollar(6) |> should not' (equal (Dollar(5)))
+    Money.Dollar(5) |> should equal (Money.Dollar(5))
+    Money.Dollar(6) |> should not' (equal (Money.Dollar(5)))
 
-    Franc(5) |> should equal (Franc(5))
-    Franc(6) |> should not' (equal (Franc(5)))
+    Money.Franc(5) |> should equal (Money.Franc(5))
+    Money.Franc(6) |> should not' (equal (Money.Franc(5)))
 
-    Franc(5) |> should not' (equal (Dollar(5)))
+    Money.Franc(5) |> should not' (equal (Money.Dollar(5)))
