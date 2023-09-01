@@ -51,20 +51,26 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
 
 public class Dollar : Money
 {
+    private readonly string _currency;
+    
     public Dollar(int amount) : base(amount)
     {
+        _currency = "USD";
     }
 
     public override Money Times(int multiplier) => new Dollar(Amount * multiplier);
-    public override string Currency => "USD";
+    public override string Currency => _currency;
 }
 
 public class Franc : Money
 {
+    private readonly string _currency;
+    
     public Franc(int amount) : base(amount)
     {
+        _currency = "CHF";
     }
     
     public override Money Times(int multiplier) => new Franc(Amount * multiplier);
-    public override string Currency => "CHF";
+    public override string Currency => _currency;
 }
