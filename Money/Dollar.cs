@@ -2,12 +2,12 @@ namespace Currency;
 
 public interface IExpression
 {
-    Money Reduce(string to);
+    Money Reduce(Bank bank, string to);
 }
 
 public class Bank
 {
-    public Money Reduce(IExpression source, string to) => source.Reduce(to);
+    public Money Reduce(IExpression source, string to) => source.Reduce(this, to);
 
     public void AddRate(string from, string to, decimal value)
     {
@@ -25,7 +25,7 @@ public class Sum : IExpression
         Added = added;
     }
 
-    public Money Reduce(string to)
+    public Money Reduce(Bank bank, string to)
     {
         var amount = Augend.Amount + Added.Amount;
         return new Money(amount, to);
@@ -43,7 +43,7 @@ public class Money: IEquatable<Money>, IEqualityComparer<Money>, IExpression
         Currency = currency;
     }
 
-    public Money Reduce(string to)
+    public Money Reduce(Bank bank, string to)
     {
         var rate = (Currency == "CHF" && to == "USD") ? 2 : 1;
         return new Money(Amount / rate, to);
