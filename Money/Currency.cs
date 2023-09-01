@@ -9,7 +9,7 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
         Amount = amount;
     }
 
-    public static Dollar Dollar(int amount) => new(amount);
+    public static Currency Dollar(int amount) => new(amount);
     public static Franc Franc(int amount) => new(amount);
 
     public abstract Money Times(int multiplier);
@@ -48,13 +48,13 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
     }
 }
 
-public class Dollar : Money
+public class Currency : Money
 {
-    public Dollar(int amount) : base(amount)
+    public Currency(int amount) : base(amount)
     {
     }
 
-    public override Money Times(int multiplier) => new Dollar(Amount * multiplier);
+    public override Money Times(int multiplier) => new Currency(Amount * multiplier);
 }
 
 public class Franc : Money
