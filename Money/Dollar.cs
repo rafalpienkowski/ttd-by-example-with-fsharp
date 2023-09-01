@@ -1,6 +1,11 @@
 namespace Money;
 
-public class Dollar : IEquatable<Dollar>
+public class Money
+{
+    
+}
+
+public class Dollar : Money, IEquatable<Dollar>
 {
     private readonly int _amount;
 
@@ -32,7 +37,7 @@ public class Dollar : IEquatable<Dollar>
     }
 }
 
-public class Franc : IEquatable<Franc>
+public class Franc : Money, IEquatable<Franc>
 {
     private readonly int _amount;
 

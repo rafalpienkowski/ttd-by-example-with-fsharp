@@ -14,8 +14,10 @@ open FsUnit.Xunit
 //HashCode() -> done
 //Equal null -> done
 //Equal object -> done
-// 5 CSF * 2 = 20 CHF -> done
-
+//5 CSF * 2 = 20 CHF -> done
+//Dollar/Franc duplication -> in progress
+//Common equals
+//Common times
 
 [<Fact>]
 let ``Test multiplication`` () =
