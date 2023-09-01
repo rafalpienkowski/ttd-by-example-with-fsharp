@@ -9,8 +9,7 @@ public class Bank
     public Money Reduce(IExpression source, string to)
     {
         var sum = (Sum)source;
-        var amount = sum.Augend.Amount + sum.Added.Amount;
-        return new Money(amount, to);
+        return sum.Reduce(to);
     }
 }
 
@@ -23,6 +22,12 @@ public class Sum : IExpression
     {
         Augend = augend;
         Added = added;
+    }
+
+    public Money Reduce(string to)
+    {
+        var amount = Augend.Amount + Added.Amount;
+        return new Money(amount, to);
     }
 }
 
