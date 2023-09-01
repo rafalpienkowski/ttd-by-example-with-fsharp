@@ -4,24 +4,6 @@ open Currency
 open Xunit
 open FsUnit.Xunit
 
-//Ideas
-//$5 + 10 CHF = $10 if rate is 2:1
-//$5 * 2 = $10 -> done
-//Make "amount" private -> done
-//Dollar side-effects -> done
-//Money rounding?
-//Equals() -> done
-//HashCode() -> done
-//Equal null -> done
-//Equal object -> done
-//5 CSF * 2 = 20 CHF -> done
-//Dollar/Franc duplication -> done
-//Common equals -> done
-//Common times
-//Compare Francs with Dollars -> done
-//Currency -> done
-//Delete test Franc multiplication
-
 [<Fact>]
 let ``Test multiplication`` () =
     let fiveDollars: Money = Money.Dollar(5)
@@ -74,4 +56,11 @@ let ``Reduce sum`` () =
 let ``Reduce money`` () =
     let bank = Bank()
     let result = bank.Reduce(Money.Dollar(1), "USD")
+    Money.Dollar(1) |> should equal result
+    
+[<Fact>]
+let ``Reduce money in different currencies`` () =
+    let bank = Bank()
+    bank.AddRate("CHF", "USD", 2)
+    let result = bank.Reduce(Money.Franc(2), "USD")
     Money.Dollar(1) |> should equal result

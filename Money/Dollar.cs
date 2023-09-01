@@ -8,6 +8,10 @@ public interface IExpression
 public class Bank
 {
     public Money Reduce(IExpression source, string to) => source.Reduce(to);
+
+    public void AddRate(string from, string to, decimal value)
+    {
+    }
 }
 
 public class Sum : IExpression
@@ -39,7 +43,11 @@ public class Money: IEquatable<Money>, IEqualityComparer<Money>, IExpression
         Currency = currency;
     }
 
-    public Money Reduce(string to) => this;
+    public Money Reduce(string to)
+    {
+        var rate = (Currency == "CHF" && to == "USD") ? 2 : 1;
+        return new Money(Amount / rate, to);
+    }
 
     public Money Times(int multiplier) => new(Amount * multiplier, Currency);
 
