@@ -12,6 +12,18 @@ public class Bank
     }
 }
 
+public class Sum : IExpression
+{
+    public Money Added;
+    public Money Augend;
+
+    public Sum(Money augend, Money added)
+    {
+        Augend = augend;
+        Added = added;
+    }
+}
+
 public class Money: IEquatable<Money>, IEqualityComparer<Money>, IExpression
 {
     private readonly int _amount;
@@ -25,7 +37,7 @@ public class Money: IEquatable<Money>, IEqualityComparer<Money>, IExpression
 
     public Money Times(int multiplier) => new(_amount * multiplier, Currency);
 
-    public IExpression Plus(Money added) => new Money(_amount + added._amount, Currency);
+    public IExpression Plus(Money added) => new Sum(this, added);
 
     public static Money Dollar(int amount) => new(amount, "USD");
     public static Money Franc(int amount) => new(amount, "CHF");

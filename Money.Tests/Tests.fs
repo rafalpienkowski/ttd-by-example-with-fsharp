@@ -48,9 +48,17 @@ let ``Test currency`` () =
     Money.Franc(1).Currency |> should equal "CHF"
     
 [<Fact>]
-let ``Test simple addition`` () =
+let ``Simple addition`` () =
     let fiveDollars = Money.Dollar(5)
     let sum = fiveDollars.Plus(fiveDollars)
     let bank = Bank()
     let reduced = bank.Reduce(sum, "USD")
     Money.Dollar(10) |> should equal reduced
+    
+[<Fact>]
+let ``Plus returns sum`` () =
+    let fiveDollars = Money.Dollar(5)
+    let result = fiveDollars.Plus(fiveDollars)
+    let sum = result :?> Sum
+    fiveDollars |> should equal sum.Augend
+    fiveDollars |> should equal sum.Added
