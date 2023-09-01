@@ -3,18 +3,19 @@ namespace Currency;
 public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
 {
     protected readonly int Amount;
-    protected string _currency;
+    protected readonly string _currency;
 
-    protected Money(int amount)
+    protected Money(int amount, string currency)
     {
         Amount = amount;
+        _currency = currency;
     }
     
     public abstract Money Times(int multiplier);
     public string Currency => _currency;
 
-    public static Dollar Dollar(int amount) => new(amount, null);
-    public static Franc Franc(int amount) => new(amount, null);
+    public static Dollar Dollar(int amount) => new(amount, "USD");
+    public static Franc Franc(int amount) => new(amount, "CHF");
 
     public bool Equals(Money? other)
     {
@@ -52,20 +53,18 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
 
 public class Dollar : Money
 {
-    public Dollar(int amount, string currency) : base(amount)
+    internal Dollar(int amount, string currency) : base(amount, currency)
     {
-        _currency = "USD";
     }
 
-    public override Money Times(int multiplier) => new Dollar(Amount * multiplier, null);
+    public override Money Times(int multiplier) => Dollar(Amount * multiplier);
 }
 
 public class Franc : Money
 {
-    public Franc(int amount, string currency) : base(amount)
+    internal Franc(int amount, string currency) : base(amount, currency)
     {
-        _currency = "CHF";
     }
     
-    public override Money Times(int multiplier) => new Franc(Amount * multiplier, null);
+    public override Money Times(int multiplier) => Franc(Amount * multiplier);
 }

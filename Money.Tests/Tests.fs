@@ -19,7 +19,7 @@ open FsUnit.Xunit
 //Common equals -> done
 //Common times
 //Compare Francs with Dollars -> done
-//Currency -> in progress
+//Currency -> done
 //Delete test Franc multiplication
 
 [<Fact>]
