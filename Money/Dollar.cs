@@ -1,26 +1,24 @@
 namespace Money;
 
-public class Money
+public abstract class Money
 {
-    
+    protected int Amount;
 }
 
 public class Dollar : Money, IEquatable<Dollar>
 {
-    private readonly int _amount;
-
     public Dollar(int amount)
     {
-        _amount = amount;
+        Amount = amount;
     }
 
-    public Dollar Times(int multiplier) => new(_amount * multiplier);
+    public Dollar Times(int multiplier) => new(Amount * multiplier);
 
     public bool Equals(Dollar? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return _amount == other._amount;
+        return Amount == other.Amount;
     }
 
     public override bool Equals(object? obj)
@@ -33,26 +31,25 @@ public class Dollar : Money, IEquatable<Dollar>
 
     public override int GetHashCode()
     {
-        return _amount;
+        return Amount;
     }
 }
 
 public class Franc : Money, IEquatable<Franc>
 {
-    private readonly int _amount;
 
     public Franc(int amount)
     {
-        _amount = amount;
+        Amount = amount;
     }
     
-    public Franc Times(int multiplier) => new(_amount * multiplier);
+    public Franc Times(int multiplier) => new(Amount * multiplier);
 
     public bool Equals(Franc? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return _amount == other._amount;
+        return Amount == other.Amount;
     }
 
     public override bool Equals(object? obj)
@@ -65,6 +62,6 @@ public class Franc : Money, IEquatable<Franc>
 
     public override int GetHashCode()
     {
-        return _amount;
+        return Amount;
     }
 }
