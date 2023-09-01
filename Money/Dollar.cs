@@ -11,9 +11,9 @@ public class Money: IEquatable<Money>, IEqualityComparer<Money>
         Currency = currency;
     }
 
-    public Money Times(int multiplier) => new Money(Amount * multiplier, Currency);
-    public string Currency => _currency;
     public Money Times(int multiplier) => new(_amount * multiplier, Currency);
+
+    public Money Plus(Money added) => new(_amount + added._amount, Currency);
 
     public static Money Dollar(int amount) => new(amount, "USD");
     public static Money Franc(int amount) => new(amount, "CHF");
