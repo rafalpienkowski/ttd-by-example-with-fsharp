@@ -40,10 +40,6 @@ let ``Test Franc multiplication`` () =
 let ``Test equality`` () =
     Money.Dollar(5) |> should equal (Money.Dollar(5))
     Money.Dollar(6) |> should not' (equal (Money.Dollar(5)))
-
-    Money.Franc(5) |> should equal (Money.Franc(5))
-    Money.Franc(6) |> should not' (equal (Money.Franc(5)))
-
     Money.Franc(5) |> should not' (equal (Money.Dollar(5)))
 
 [<Fact>]
@@ -51,6 +47,3 @@ let ``Test currency`` () =
     Money.Dollar(1).Currency |> should equal "USD"
     Money.Franc(1).Currency |> should equal "CHF"
     
-[<Fact>]
-let ``Test different class equality`` () =
-    Money(10, "CHF") |> should equal (Franc(10, "CHF"))

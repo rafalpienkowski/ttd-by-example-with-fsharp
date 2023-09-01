@@ -14,8 +14,8 @@ public class Money: IEquatable<Money>, IEqualityComparer<Money>
     public Money Times(int multiplier) => new Money(Amount * multiplier, Currency);
     public string Currency => _currency;
 
-    public static Dollar Dollar(int amount) => new(amount, "USD");
-    public static Franc Franc(int amount) => new(amount, "CHF");
+    public static Money Dollar(int amount) => new(amount, "USD");
+    public static Money Franc(int amount) => new(amount, "CHF");
 
     public override string ToString() => $"{Amount} {Currency}";
 
@@ -49,19 +49,5 @@ public class Money: IEquatable<Money>, IEqualityComparer<Money>
     public int GetHashCode(Money obj)
     {
         return obj.Amount;
-    }
-}
-
-public class Dollar : Money
-{
-    public Dollar(int amount, string currency) : base(amount, currency)
-    {
-    }
-}
-
-public class Franc : Money
-{
-    public Franc(int amount, string currency) : base(amount, currency)
-    {
     }
 }
