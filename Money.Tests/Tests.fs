@@ -62,3 +62,10 @@ let ``Plus returns sum`` () =
     let sum = result :?> Sum
     fiveDollars |> should equal sum.Augend
     fiveDollars |> should equal sum.Added
+    
+[<Fact>]
+let ``Reduce sum`` () =
+    let sum = Sum(Money.Dollar(3), Money.Dollar(4))
+    let bank = Bank()
+    let result = bank.Reduce(sum, "USD")
+    Money.Dollar(7) |> should equal result
