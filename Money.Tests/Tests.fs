@@ -15,9 +15,10 @@ open FsUnit.Xunit
 //Equal null -> done
 //Equal object -> done
 //5 CSF * 2 = 20 CHF -> done
-//Dollar/Franc duplication -> in progress
-//Common equals
+//Dollar/Franc duplication -> done
+//Common equals -> done
 //Common times
+//Compare Francs with Dollars -> done
 
 [<Fact>]
 let ``Test multiplication`` () =
@@ -40,5 +41,7 @@ let ``Test equality`` () =
     
     Franc(5) |> should equal (Franc(5))
     Franc(6) |> should not' (equal (Franc(5)))
+    
+    Franc(5) |> should not' (equal (Dollar(5)))
     
     
