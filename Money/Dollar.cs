@@ -2,19 +2,12 @@ namespace Currency;
 
 public interface IExpression
 {
+    Money Reduce(string to);
 }
 
 public class Bank
 {
-    public Money Reduce(IExpression source, string to)
-    {
-        if (source is Money money)
-        {
-            return money;
-        }
-        var sum = (Sum)source;
-        return sum.Reduce(to);
-    }
+    public Money Reduce(IExpression source, string to) => source.Reduce(to);
 }
 
 public class Sum : IExpression
@@ -45,6 +38,8 @@ public class Money: IEquatable<Money>, IEqualityComparer<Money>, IExpression
         Amount = amount;
         Currency = currency;
     }
+
+    public Money Reduce(string to) => this;
 
     public Money Times(int multiplier) => new(Amount * multiplier, Currency);
 
