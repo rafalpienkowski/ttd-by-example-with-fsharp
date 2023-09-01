@@ -22,7 +22,7 @@ open FsUnit.Xunit
 
 [<Fact>]
 let ``Test multiplication`` () =
-    let fiveDollars = Dollar(5)
+    let fiveDollars = Money.Dollar(5)
     
     fiveDollars.Times(2) |> should equal (Dollar(10))
     fiveDollars.Times(3) |> should equal (Dollar(15))

@@ -9,6 +9,8 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
         Amount = amount;
     }
 
+    public static Dollar Dollar(int amount) => new(amount);
+
     public bool Equals(Money? other)
     {
         if (ReferenceEquals(null, other)) return false;
@@ -49,7 +51,7 @@ public class Dollar : Money
     {
     }
 
-    public Dollar Times(int multiplier) => new(Amount * multiplier);
+    public Money Times(int multiplier) => new Dollar(Amount * multiplier);
 }
 
 public class Franc : Money
@@ -59,5 +61,5 @@ public class Franc : Money
     {
     }
     
-    public Franc Times(int multiplier) => new(Amount * multiplier);
+    public Money Times(int multiplier) => new Franc(Amount * multiplier);
 }
