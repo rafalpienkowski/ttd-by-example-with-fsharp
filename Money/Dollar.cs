@@ -2,28 +2,29 @@ namespace Currency;
 
 public class Money: IEquatable<Money>, IEqualityComparer<Money>
 {
-    protected readonly int Amount;
-    protected readonly string _currency;
+    private readonly int _amount;
+    public string Currency { get; }
 
     public Money(int amount, string currency)
     {
-        Amount = amount;
-        _currency = currency;
+        _amount = amount;
+        Currency = currency;
     }
 
     public Money Times(int multiplier) => new Money(Amount * multiplier, Currency);
     public string Currency => _currency;
+    public Money Times(int multiplier) => new(_amount * multiplier, Currency);
 
     public static Money Dollar(int amount) => new(amount, "USD");
     public static Money Franc(int amount) => new(amount, "CHF");
 
-    public override string ToString() => $"{Amount} {Currency}";
+    public override string ToString() => $"{_amount} {Currency}";
 
     public bool Equals(Money? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return Amount == other.Amount && Currency == other.Currency;
+        return _amount == other._amount && Currency == other.Currency;
     }
 
     public override bool Equals(object? obj)
@@ -35,7 +36,7 @@ public class Money: IEquatable<Money>, IEqualityComparer<Money>
 
     public override int GetHashCode()
     {
-        return Amount.GetHashCode() * Currency.GetHashCode();
+        return _amount.GetHashCode() * Currency.GetHashCode();
     }
 
     public bool Equals(Money? x, Money? y)
@@ -43,11 +44,11 @@ public class Money: IEquatable<Money>, IEqualityComparer<Money>
         if (ReferenceEquals(x, y)) return true;
         if (ReferenceEquals(x, null)) return false;
         if (ReferenceEquals(y, null)) return false;
-        return x.Amount == y.Amount && x.Currency == y.Currency;
+        return x._amount == y._amount && x.Currency == y.Currency;
     }
 
     public int GetHashCode(Money obj)
     {
-        return obj.Amount;
+        return obj._amount;
     }
 }

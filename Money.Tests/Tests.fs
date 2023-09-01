@@ -47,3 +47,7 @@ let ``Test currency`` () =
     Money.Dollar(1).Currency |> should equal "USD"
     Money.Franc(1).Currency |> should equal "CHF"
     
+[<Fact>]
+let ``Test simple addition`` () =
+    let sum = Money.Dollar(5).Plus(Money.Dollar(5))
+    Money.Dollar(10) |> should equal sum
