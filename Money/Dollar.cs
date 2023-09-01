@@ -17,23 +17,25 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
     public static Dollar Dollar(int amount) => new(amount, "USD");
     public static Franc Franc(int amount) => new(amount, "CHF");
 
+    public override string ToString() => $"{Amount} {Currency}";
+
     public bool Equals(Money? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return Amount == other.Amount;
+        return Amount == other.Amount && Currency == other.Currency;
     }
 
     public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        return obj.GetType() == GetType() && Equals((Money)obj);
+        return obj.GetType() == GetType() && Equals((Money)obj) && Currency == ((Money)obj).Currency;
     }
 
     public override int GetHashCode()
     {
-        return Amount;
+        return Amount.GetHashCode() * Currency.GetHashCode();
     }
 
     public bool Equals(Money? x, Money? y)
@@ -42,7 +44,7 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
         if (ReferenceEquals(x, null)) return false;
         if (ReferenceEquals(y, null)) return false;
         if (x.GetType() != y.GetType()) return false;
-        return x.Amount == y.Amount;
+        return x.Amount == y.Amount && x.Currency == y.Currency;
     }
 
     public int GetHashCode(Money obj)
