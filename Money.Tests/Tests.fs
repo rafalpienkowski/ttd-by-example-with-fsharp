@@ -69,3 +69,9 @@ let ``Reduce sum`` () =
     let bank = Bank()
     let result = bank.Reduce(sum, "USD")
     Money.Dollar(7) |> should equal result
+    
+[<Fact>]
+let ``Reduce money`` () =
+    let bank = Bank()
+    let result = bank.Reduce(Money.Dollar(1), "USD")
+    Money.Dollar(1) |> should equal result
