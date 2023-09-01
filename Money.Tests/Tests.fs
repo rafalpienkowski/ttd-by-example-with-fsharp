@@ -22,26 +22,24 @@ open FsUnit.Xunit
 
 [<Fact>]
 let ``Test multiplication`` () =
-    let fiveDollars = Money.Dollar(5)
-    
+    let fiveDollars: Money = Money.Dollar(5)
+
     fiveDollars.Times(2) |> should equal (Dollar(10))
     fiveDollars.Times(3) |> should equal (Dollar(15))
 
 [<Fact>]
 let ``Test Franc multiplication`` () =
-    let fiveFrancs = Franc(5)
-    
+    let fiveFrancs: Money = Franc(5)
+
     fiveFrancs.Times(2) |> should equal (Franc(10))
     fiveFrancs.Times(3) |> should equal (Franc(15))
-    
+
 [<Fact>]
 let ``Test equality`` () =
     Dollar(5) |> should equal (Dollar(5))
     Dollar(6) |> should not' (equal (Dollar(5)))
-    
+
     Franc(5) |> should equal (Franc(5))
     Franc(6) |> should not' (equal (Franc(5)))
-    
+
     Franc(5) |> should not' (equal (Dollar(5)))
-    
-    
