@@ -35,8 +35,10 @@ let ``Test Franc multiplication`` () =
     
 [<Fact>]
 let ``Test equality`` () =
-    let fiveDollars = Dollar(5)
-    Dollar(5) |> should equal fiveDollars
-    Dollar(6) |> should not' (equal fiveDollars)
+    Dollar(5) |> should equal (Dollar(5))
+    Dollar(6) |> should not' (equal (Dollar(5)))
+    
+    Franc(5) |> should equal (Franc(5))
+    Franc(6) |> should not' (equal (Franc(5)))
     
     
