@@ -19,6 +19,8 @@ open FsUnit.Xunit
 //Common equals -> done
 //Common times
 //Compare Francs with Dollars -> done
+//Currency -> in progress
+//Delete test Franc multiplication
 
 [<Fact>]
 let ``Test multiplication`` () =
@@ -43,3 +45,8 @@ let ``Test equality`` () =
     Money.Franc(6) |> should not' (equal (Money.Franc(5)))
 
     Money.Franc(5) |> should not' (equal (Money.Dollar(5)))
+
+[<Fact>]
+let ``Test currency`` () =
+    Money.Dollar(1).Currency |> should equal "USD"
+    Money.Franc(1).Currency |> should equal "CHF"

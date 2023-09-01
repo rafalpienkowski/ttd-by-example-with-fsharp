@@ -8,11 +8,12 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
     {
         Amount = amount;
     }
-
-    public static Currency Dollar(int amount) => new(amount);
-    public static Franc Franc(int amount) => new(amount);
-
+    
     public abstract Money Times(int multiplier);
+    public abstract string Currency { get; }
+
+    public static Dollar Dollar(int amount) => new(amount);
+    public static Franc Franc(int amount) => new(amount);
 
     public bool Equals(Money? other)
     {
@@ -48,21 +49,22 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
     }
 }
 
-public class Currency : Money
+public class Dollar : Money
 {
-    public Currency(int amount) : base(amount)
+    public Dollar(int amount) : base(amount)
     {
     }
 
-    public override Money Times(int multiplier) => new Currency(Amount * multiplier);
+    public override Money Times(int multiplier) => new Dollar(Amount * multiplier);
+    public override string Currency => "USD";
 }
 
 public class Franc : Money
 {
-
     public Franc(int amount) : base(amount)
     {
     }
     
     public override Money Times(int multiplier) => new Franc(Amount * multiplier);
+    public override string Currency => "CHF";
 }
