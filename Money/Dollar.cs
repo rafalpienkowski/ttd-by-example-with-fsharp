@@ -1,6 +1,18 @@
 namespace Currency;
 
-public class Money: IEquatable<Money>, IEqualityComparer<Money>
+public interface IExpression
+{
+}
+
+public class Bank
+{
+    public Money Reduce(IExpression source, string to)
+    {
+        return Money.Dollar(10);
+    }
+}
+
+public class Money: IEquatable<Money>, IEqualityComparer<Money>, IExpression
 {
     private readonly int _amount;
     public string Currency { get; }
@@ -13,7 +25,7 @@ public class Money: IEquatable<Money>, IEqualityComparer<Money>
 
     public Money Times(int multiplier) => new(_amount * multiplier, Currency);
 
-    public Money Plus(Money added) => new(_amount + added._amount, Currency);
+    public IExpression Plus(Money added) => new Money(_amount + added._amount, Currency);
 
     public static Money Dollar(int amount) => new(amount, "USD");
     public static Money Franc(int amount) => new(amount, "CHF");

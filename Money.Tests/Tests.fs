@@ -49,5 +49,8 @@ let ``Test currency`` () =
     
 [<Fact>]
 let ``Test simple addition`` () =
-    let sum = Money.Dollar(5).Plus(Money.Dollar(5))
-    Money.Dollar(10) |> should equal sum
+    let fiveDollars = Money.Dollar(5)
+    let sum = fiveDollars.Plus(fiveDollars)
+    let bank = Bank()
+    let reduced = bank.Reduce(sum, "USD")
+    Money.Dollar(10) |> should equal reduced
