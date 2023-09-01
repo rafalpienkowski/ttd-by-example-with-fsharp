@@ -1,17 +1,17 @@
 namespace Currency;
 
-public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
+public class Money: IEquatable<Money>, IEqualityComparer<Money>
 {
     protected readonly int Amount;
     protected readonly string _currency;
 
-    protected Money(int amount, string currency)
+    public Money(int amount, string currency)
     {
         Amount = amount;
         _currency = currency;
     }
-    
-    public abstract Money Times(int multiplier);
+
+    public Money Times(int multiplier) => new Money(Amount * multiplier, Currency);
     public string Currency => _currency;
 
     public static Dollar Dollar(int amount) => new(amount, "USD");
@@ -30,7 +30,7 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        return obj.GetType() == GetType() && Equals((Money)obj) && Currency == ((Money)obj).Currency;
+        return Equals((Money)obj) && Currency == ((Money)obj).Currency;
     }
 
     public override int GetHashCode()
@@ -43,7 +43,6 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
         if (ReferenceEquals(x, y)) return true;
         if (ReferenceEquals(x, null)) return false;
         if (ReferenceEquals(y, null)) return false;
-        if (x.GetType() != y.GetType()) return false;
         return x.Amount == y.Amount && x.Currency == y.Currency;
     }
 
@@ -55,18 +54,14 @@ public abstract class Money: IEquatable<Money>, IEqualityComparer<Money>
 
 public class Dollar : Money
 {
-    internal Dollar(int amount, string currency) : base(amount, currency)
+    public Dollar(int amount, string currency) : base(amount, currency)
     {
     }
-
-    public override Money Times(int multiplier) => Dollar(Amount * multiplier);
 }
 
 public class Franc : Money
 {
-    internal Franc(int amount, string currency) : base(amount, currency)
+    public Franc(int amount, string currency) : base(amount, currency)
     {
     }
-    
-    public override Money Times(int multiplier) => Franc(Amount * multiplier);
 }

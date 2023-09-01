@@ -50,3 +50,7 @@ let ``Test equality`` () =
 let ``Test currency`` () =
     Money.Dollar(1).Currency |> should equal "USD"
     Money.Franc(1).Currency |> should equal "CHF"
+    
+[<Fact>]
+let ``Test different class equality`` () =
+    Money(10, "CHF") |> should equal (Franc(10, "CHF"))
