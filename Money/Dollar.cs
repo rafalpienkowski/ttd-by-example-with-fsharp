@@ -42,10 +42,7 @@ public class Sum : IExpression
         return new Money(amount, to);
     }
 
-    public IExpression Plus(IExpression added)
-    {
-        return null!;
-    }
+    public IExpression Plus(IExpression added) => new Sum(this, added);
 }
 
 public class Money: IEquatable<Money>, IEqualityComparer<Money>, IExpression
