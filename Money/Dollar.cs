@@ -3,6 +3,7 @@ namespace Currency;
 public interface IExpression
 {
     Money Reduce(Bank bank, string to);
+    IExpression Plus(IExpression added);
 }
 
 public class Bank
@@ -39,6 +40,11 @@ public class Sum : IExpression
     {
         var amount = Augend.Reduce(bank, to).Amount + Added.Reduce(bank, to).Amount;
         return new Money(amount, to);
+    }
+
+    public IExpression Plus(IExpression added)
+    {
+        return null!;
     }
 }
 
