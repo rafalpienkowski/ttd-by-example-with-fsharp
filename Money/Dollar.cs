@@ -59,7 +59,7 @@ public class Money: IEquatable<Money>, IEqualityComparer<Money>, IExpression
         return new Money(Amount / rate, to);
     }
 
-    public Money Times(int multiplier) => new(Amount * multiplier, Currency);
+    public IExpression Times(int multiplier) => new Money(Amount * multiplier, Currency);
 
     public IExpression Plus(IExpression added) => new Sum(this, added);
 
