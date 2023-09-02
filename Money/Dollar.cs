@@ -37,7 +37,7 @@ public class Sum : IExpression
 
     public Money Reduce(Bank bank, string to)
     {
-        var amount = Augend.Amount + Added.Amount;
+        var amount = Augend.Reduce(bank, to).Amount + Added.Reduce(bank, to).Amount;
         return new Money(amount, to);
     }
 }

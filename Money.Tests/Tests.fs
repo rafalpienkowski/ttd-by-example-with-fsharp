@@ -1,4 +1,4 @@
-module ``Money tests``
+module ``Money should``
 
 open Currency
 open Xunit
@@ -68,3 +68,12 @@ let ``Reduce money in different currencies`` () =
     bank.AddRate("CHF", "USD", 2)
     let result = bank.Reduce(Money.Franc(2), "USD")
     Money.Dollar(1) |> should equal result
+    
+[<Fact>]
+let ``test mixed addition`` () =
+    let fiveDollars = Money.Dollar(5)
+    let tenFrancs = Money.Franc(10)
+    let bank = Bank()
+    bank.AddRate("CHF", "USD", 2)
+    let result = bank.Reduce(fiveDollars.Plus(tenFrancs), "USD")
+    Money.Dollar(10) |> should equal result
