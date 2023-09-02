@@ -26,18 +26,18 @@ public class Bank
 
 public class Sum : IExpression
 {
-    private readonly IExpression _added;
-    private readonly IExpression _augend;
+    public readonly IExpression Added;
+    public readonly IExpression Augend;
 
     public Sum(IExpression augend, IExpression added)
     {
-        _augend = augend;
-        _added = added;
+        Augend = augend;
+        Added = added;
     }
 
     public Money Reduce(Bank bank, string to)
     {
-        var amount = _augend.Reduce(bank, to).Amount + _added.Reduce(bank, to).Amount;
+        var amount = Augend.Reduce(bank, to).Amount + Added.Reduce(bank, to).Amount;
         return new Money(amount, to);
     }
 }
@@ -61,7 +61,7 @@ public class Money: IEquatable<Money>, IEqualityComparer<Money>, IExpression
 
     public Money Times(int multiplier) => new(Amount * multiplier, Currency);
 
-    public IExpression Plus(Money added) => new Sum(this, added);
+    public IExpression Plus(IExpression added) => new Sum(this, added);
 
     public static Money Dollar(int amount) => new(amount, "USD");
     public static Money Franc(int amount) => new(amount, "CHF");
