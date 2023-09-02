@@ -57,6 +57,10 @@ let ``Reduce money`` () =
     let bank = Bank()
     let result = bank.Reduce(Money.Dollar(1), "USD")
     Money.Dollar(1) |> should equal result
+
+[<Fact>]    
+let ``Check identity rate`` () =
+    Bank().Rate("USD", "USD") |> should equal 1
     
 [<Fact>]
 let ``Reduce money in different currencies`` () =
