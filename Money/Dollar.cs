@@ -4,6 +4,7 @@ public interface IExpression
 {
     Money Reduce(Bank bank, string to);
     IExpression Plus(IExpression added);
+    IExpression Times(int multiplier);
 }
 
 public class Bank
@@ -43,9 +44,11 @@ public class Sum : IExpression
     }
 
     public IExpression Plus(IExpression added) => new Sum(this, added);
+
+    public IExpression Times(int multiplier) => new Sum(Augend.Times(multiplier), Added.Times(multiplier));
 }
 
-public class Money: IEquatable<Money>, IEqualityComparer<Money>, IExpression
+public class Money : IEquatable<Money>, IEqualityComparer<Money>, IExpression
 {
     public int Amount { get; }
     public string Currency { get; }

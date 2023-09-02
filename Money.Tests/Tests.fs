@@ -87,3 +87,13 @@ let ``test sum plus money`` () =
     let sum = Sum(fiveDollars, tenFrancs).Plus(fiveDollars)
     let result = bank.Reduce(sum, "USD")
     Money.Dollar(15) |> should equal result
+
+[<Fact>]
+let ``test sum times`` () =
+    let fiveDollars = Money.Dollar(5)
+    let tenFrancs = Money.Franc(10)
+    let bank = Bank()
+    bank.AddRate("CHF", "USD", 2)
+    let sum = Sum(fiveDollars, tenFrancs).Times(2)
+    let result = bank.Reduce(sum, "USD")
+    Money.Dollar(20) |> should equal result
