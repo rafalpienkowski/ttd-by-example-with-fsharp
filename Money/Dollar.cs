@@ -26,10 +26,10 @@ public class Bank
 
 public class Sum : IExpression
 {
-    public Money Added;
-    public Money Augend;
+    public IExpression Added;
+    public IExpression Augend;
 
-    public Sum(Money augend, Money added)
+    public Sum(IExpression augend, IExpression added)
     {
         Augend = augend;
         Added = added;
