@@ -26,18 +26,18 @@ public class Bank
 
 public class Sum : IExpression
 {
-    public IExpression Added;
-    public IExpression Augend;
+    private readonly IExpression _added;
+    private readonly IExpression _augend;
 
     public Sum(IExpression augend, IExpression added)
     {
-        Augend = augend;
-        Added = added;
+        _augend = augend;
+        _added = added;
     }
 
     public Money Reduce(Bank bank, string to)
     {
-        var amount = Augend.Reduce(bank, to).Amount + Added.Reduce(bank, to).Amount;
+        var amount = _augend.Reduce(bank, to).Amount + _added.Reduce(bank, to).Amount;
         return new Money(amount, to);
     }
 }
