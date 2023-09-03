@@ -1,4 +1,4 @@
-namespace Currency;
+namespace Money;
 
 public interface IExpression
 {

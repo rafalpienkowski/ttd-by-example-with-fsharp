@@ -1,6 +1,6 @@
 module ``Money should``
 
-open Currency
+open Money
 open Xunit
 open FsUnit.Xunit
 
