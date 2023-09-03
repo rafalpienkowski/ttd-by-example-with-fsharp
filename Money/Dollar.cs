@@ -48,17 +48,8 @@ public class Sum : IExpression
     public IExpression Times(int multiplier) => new Sum(Augend.Times(multiplier), Added.Times(multiplier));
 }
 
-public class Money : IEquatable<Money>, IEqualityComparer<Money>, IExpression
+public record Money(int Amount, string Currency) : IExpression
 {
-    public int Amount { get; }
-    public string Currency { get; }
-
-    public Money(int amount, string currency)
-    {
-        Amount = amount;
-        Currency = currency;
-    }
-
     public Money Reduce(Bank bank, string to)
     {
         var rate = bank.Rate(Currency, to);
@@ -73,36 +64,4 @@ public class Money : IEquatable<Money>, IEqualityComparer<Money>, IExpression
     public static Money Franc(int amount) => new(amount, "CHF");
 
     public override string ToString() => $"{Amount} {Currency}";
-
-    public bool Equals(Money? other)
-    {
-        if (ReferenceEquals(null, other)) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return Amount == other.Amount && Currency == other.Currency;
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (ReferenceEquals(null, obj)) return false;
-        if (ReferenceEquals(this, obj)) return true;
-        return Equals((Money)obj) && Currency == ((Money)obj).Currency;
-    }
-
-    public override int GetHashCode()
-    {
-        return Amount.GetHashCode() * Currency.GetHashCode();
-    }
-
-    public bool Equals(Money? x, Money? y)
-    {
-        if (ReferenceEquals(x, y)) return true;
-        if (ReferenceEquals(x, null)) return false;
-        if (ReferenceEquals(y, null)) return false;
-        return x.Amount == y.Amount && x.Currency == y.Currency;
-    }
-
-    public int GetHashCode(Money obj)
-    {
-        return obj.Amount;
-    }
 }
