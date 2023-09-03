@@ -1,5 +1,6 @@
 module ``Money should``
 
+open System.Collections.Generic
 open Money
 open Xunit
 open FsUnit.Xunit
@@ -97,3 +98,11 @@ let ``support sum with times operation`` () =
     let sum = Sum(fiveDollars, tenFrancs).Times(2)
     let result = bank.Reduce(sum, "USD")
     Money.Dollar(20) |> should equal result
+
+[<Fact>]
+let ``block reduce operation when bank doesn't know the rate`` () =
+    let fiveDollars = Money.Dollar(5)
+    let tenFrancs = Money.Franc(10)
+    let bank = Bank()
+    let sum = Sum(fiveDollars, tenFrancs)
+    (fun() -> bank.Reduce(sum, "USD") |> ignore) |> should throw typeof<KeyNotFoundException>
