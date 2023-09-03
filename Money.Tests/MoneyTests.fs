@@ -87,6 +87,15 @@ let ``support addition of mixed currencies`` () =
     bank.AddRate("CHF", "USD", 2)
     let result = bank.Reduce(fiveDollars.Plus(tenFrancs), "USD")
     Money.Dollar(10) |> should equal result
+ 
+[<Fact>]
+let ``support subtraction of mixed currencies`` () =
+    let tenDollars = Money.Dollar(10)
+    let tenFrancs = Money.Franc(10)
+    let bank = Bank()
+    bank.AddRate("CHF", "USD", 2)
+    let result = bank.Reduce(tenDollars.Minus(tenFrancs), "USD")
+    Money.Dollar(5) |> should equal result
     
 [<Fact>]
 let ``support sum with plus money operation`` () =
