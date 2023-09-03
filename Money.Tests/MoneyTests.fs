@@ -124,9 +124,19 @@ let ``support sum with times operation`` () =
     let tenFrancs = Money.Franc(10)
     let bank = Bank()
     bank.AddRate("CHF", "USD", 2)
-    let sum = Sum(fiveDollars, tenFrancs).Times(2)
-    let result = bank.Reduce(sum, "USD")
+    let wallet = Sum(fiveDollars, tenFrancs).Times(2)
+    let result = bank.Reduce(wallet, "USD")
     Money.Dollar(20) |> should equal result
+    
+[<Fact>]
+let ``support difference with times operation`` () =
+    let tenDollars = Money.Dollar(10)
+    let tenFrancs = Money.Franc(8)
+    let bank = Bank()
+    bank.AddRate("CHF", "USD", 2)
+    let wallet = Difference(tenDollars, tenFrancs).Times(2)
+    let result = bank.Reduce(wallet, "USD")
+    Money.Dollar(12) |> should equal result
 
 [<Fact>]
 let ``block reduce operation when bank doesn't know the rate`` () =
