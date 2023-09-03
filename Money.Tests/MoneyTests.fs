@@ -108,6 +108,17 @@ let ``support sum with plus money operation`` () =
     Money.Dollar(15) |> should equal result
 
 [<Fact>]
+let ``support sum with plus and minus operation`` () =
+    let fiveDollars = Money.Dollar(5)
+    let tenFrancs = Money.Franc(10)
+    let elevenDollars = Money.Dollar(11)
+    let bank = Bank()
+    bank.AddRate("CHF", "USD", 2)
+    let sum = Sum(fiveDollars, tenFrancs).Plus(fiveDollars).Minus(elevenDollars)
+    let result = bank.Reduce(sum, "USD")
+    Money.Dollar(4) |> should equal result
+
+[<Fact>]
 let ``support sum with times operation`` () =
     let fiveDollars = Money.Dollar(5)
     let tenFrancs = Money.Franc(10)
