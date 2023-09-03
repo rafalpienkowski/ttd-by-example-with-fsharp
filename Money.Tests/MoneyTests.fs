@@ -70,7 +70,7 @@ let ``reduce money`` () =
 
 [<Fact>]    
 let ``check identity rate`` () =
-    Bank().Rate("USD", "USD") |> should equal 1
+    Bank().Rate("USD", "USD") |> should equal 1m
     
 [<Fact>]
 let ``reduce money in different currencies`` () =
@@ -78,6 +78,14 @@ let ``reduce money in different currencies`` () =
     bank.AddRate("CHF", "USD", 2)
     let result = bank.Reduce(Money.Franc(2), "USD")
     Money.Dollar(1) |> should equal result
+    
+[<Fact>]
+let ``reduce money in different currencies with bank's commission`` () =
+    let bank = Bank()
+    bank.AddRate("CHF", "USD", 2)
+    bank.AddCommission(0.05m)
+    let result = bank.Reduce(Money.Franc(200), "USD")
+    result |> should equal (Money.Dollar(95.24m))
     
 [<Fact>]
 let ``support addition of mixed currencies`` () =
@@ -145,3 +153,4 @@ let ``block reduce operation when bank doesn't know the rate`` () =
     let bank = Bank()
     let sum = Sum(fiveDollars, tenFrancs)
     (fun() -> bank.Reduce(sum, "USD") |> ignore) |> should throw typeof<KeyNotFoundException>
+    
