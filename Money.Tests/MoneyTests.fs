@@ -36,7 +36,7 @@ let ``support addition of money in the same currency`` () =
     let sum = fiveDollars.Plus(fiveDollars)
     let bank = Bank()
     let reduced = bank.Reduce(sum, "USD")
-    Money.Dollar(10) |> should equal reduced
+    reduced |> should equal (Money.Dollar(10)) 
     
 [<Fact>]
 let ``support subtraction of money in the same currency`` () =
@@ -45,39 +45,39 @@ let ``support subtraction of money in the same currency`` () =
     let diff = tenDollars.Minus(fourDollars)
     let bank = Bank()
     let reduced = bank.Reduce(diff, "USD")
-    Money.Dollar(6) |> should equal reduced
+    reduced |> should equal (Money.Dollar(6))
     
 [<Fact>]
 let ``return sum of addition operation`` () =
     let fiveDollars = Money.Dollar(5)
     let result = fiveDollars.Plus(fiveDollars)
     let sum = result :?> Sum
-    fiveDollars |> should equal sum.Augend
-    fiveDollars |> should equal sum.Addend
+    sum.Augend |> should equal fiveDollars
+    sum.Addend |> should equal fiveDollars
     
 [<Fact>]
 let ``reduce sum`` () =
     let sum = Sum(Money.Dollar(3), Money.Dollar(4))
     let bank = Bank()
     let result = bank.Reduce(sum, "USD")
-    Money.Dollar(7) |> should equal result
+    result |> should equal (Money.Dollar(7))
     
 [<Fact>]
 let ``reduce money`` () =
     let bank = Bank()
     let result = bank.Reduce(Money.Dollar(1), "USD")
-    Money.Dollar(1) |> should equal result
+    result |> should equal (Money.Dollar(1))
 
 [<Fact>]    
 let ``check identity rate`` () =
-    Bank().Rate("USD", "USD") |> should equal 1m
+    1m |> should equal (Bank().Rate("USD", "USD"))
     
 [<Fact>]
 let ``reduce money in different currencies`` () =
     let bank = Bank()
     bank.AddRate("CHF", "USD", 2)
     let result = bank.Reduce(Money.Franc(2), "USD")
-    Money.Dollar(1) |> should equal result
+    result |> should equal (Money.Dollar(1))
     
 [<Fact>]
 let ``reduce money in different currencies with bank's commission`` () =
@@ -94,7 +94,7 @@ let ``support addition of mixed currencies`` () =
     let bank = Bank()
     bank.AddRate("CHF", "USD", 2)
     let result = bank.Reduce(fiveDollars.Plus(tenFrancs), "USD")
-    Money.Dollar(10) |> should equal result
+    result |> should equal (Money.Dollar(10))
  
 [<Fact>]
 let ``support subtraction of mixed currencies`` () =
@@ -103,7 +103,7 @@ let ``support subtraction of mixed currencies`` () =
     let bank = Bank()
     bank.AddRate("CHF", "USD", 2)
     let result = bank.Reduce(tenDollars.Minus(tenFrancs), "USD")
-    Money.Dollar(5) |> should equal result
+    result |> should equal (Money.Dollar(5))
     
 [<Fact>]
 let ``support sum with plus money operation`` () =
@@ -113,7 +113,7 @@ let ``support sum with plus money operation`` () =
     bank.AddRate("CHF", "USD", 2)
     let sum = Sum(fiveDollars, tenFrancs).Plus(fiveDollars)
     let result = bank.Reduce(sum, "USD")
-    Money.Dollar(15) |> should equal result
+    result |> should equal (Money.Dollar(15))
 
 [<Fact>]
 let ``support sum with plus and minus operation`` () =
@@ -124,7 +124,7 @@ let ``support sum with plus and minus operation`` () =
     bank.AddRate("CHF", "USD", 2)
     let sum = Sum(fiveDollars, tenFrancs).Plus(fiveDollars).Minus(elevenDollars)
     let result = bank.Reduce(sum, "USD")
-    Money.Dollar(4) |> should equal result
+    result |> should equal (Money.Dollar(4))
 
 [<Fact>]
 let ``support sum with times operation`` () =
@@ -134,7 +134,7 @@ let ``support sum with times operation`` () =
     bank.AddRate("CHF", "USD", 2)
     let wallet = Sum(fiveDollars, tenFrancs).Times(2)
     let result = bank.Reduce(wallet, "USD")
-    Money.Dollar(20) |> should equal result
+    result |> should equal (Money.Dollar(20))
     
 [<Fact>]
 let ``support difference with times operation`` () =
@@ -144,7 +144,7 @@ let ``support difference with times operation`` () =
     bank.AddRate("CHF", "USD", 2)
     let wallet = Difference(tenDollars, tenFrancs).Times(2)
     let result = bank.Reduce(wallet, "USD")
-    Money.Dollar(12) |> should equal result
+    result |> should equal (Money.Dollar(12))
 
 [<Fact>]
 let ``block reduce operation when bank doesn't know the rate`` () =
