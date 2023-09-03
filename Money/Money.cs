@@ -8,6 +8,11 @@ public record Money(int Amount, string Currency) : IExpression
         return new Money(Amount / rate, to);
     }
 
+    public IExpression Minus(IExpression subtracted)
+    {
+        return null!;
+    }
+
     public IExpression Times(int multiplier) => this with { Amount = Amount * multiplier };
     public IExpression Plus(IExpression added) => new Sum(this, added);
 

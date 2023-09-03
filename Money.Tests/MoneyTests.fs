@@ -39,6 +39,15 @@ let ``support addition of money in the same currency`` () =
     Money.Dollar(10) |> should equal reduced
     
 [<Fact>]
+let ``support subtraction of money in the same currency`` () =
+    let tenDollars = Money.Dollar(10)
+    let fourDollars = Money.Dollar(4)
+    let diff = tenDollars.Minus(fourDollars)
+    let bank = Bank()
+    let reduced = bank.Reduce(diff, "USD")
+    Money.Dollar(6) |> should equal reduced
+    
+[<Fact>]
 let ``return sum of addition operation`` () =
     let fiveDollars = Money.Dollar(5)
     let result = fiveDollars.Plus(fiveDollars)
