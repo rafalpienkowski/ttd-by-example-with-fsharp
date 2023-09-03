@@ -53,7 +53,7 @@ let ``return sum of addition operation`` () =
     let result = fiveDollars.Plus(fiveDollars)
     let sum = result :?> Sum
     fiveDollars |> should equal sum.Augend
-    fiveDollars |> should equal sum.Added
+    fiveDollars |> should equal sum.Addend
     
 [<Fact>]
 let ``reduce sum`` () =

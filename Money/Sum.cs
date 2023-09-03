@@ -1,18 +1,15 @@
 namespace Money;
 
-public record Sum(IExpression Augend, IExpression Added) : IExpression
+public record Sum(IExpression Augend, IExpression Addend) : IExpression
 {
     public Money Reduce(Bank bank, string to)
     {
-        var amount = Augend.Reduce(bank, to).Amount + Added.Reduce(bank, to).Amount;
+        var amount = Augend.Reduce(bank, to).Amount + Addend.Reduce(bank, to).Amount;
         return new Money(amount, to);
     }
 
-    public IExpression Plus(IExpression added) => new Sum(this, added);
-    public IExpression Minus(IExpression subtracted)
-    {
-        return null!;
-    }
+    public IExpression Plus(IExpression addend) => new Sum(this, addend);
+    public IExpression Minus(IExpression subtrahend) => new Difference(this, subtrahend);
 
-    public IExpression Times(int multiplier) => new Sum(Augend.Times(multiplier), Added.Times(multiplier));
+    public IExpression Times(int multiplier) => new Sum(Augend.Times(multiplier), Addend.Times(multiplier));
 }
