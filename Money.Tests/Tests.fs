@@ -5,32 +5,32 @@ open Xunit
 open FsUnit.Xunit
 
 [<Fact>]
-let ``Test multiplication`` () =
+let ``multiply dollars`` () =
     let fiveDollars: Money = Money.Dollar(5)
 
     fiveDollars.Times(2) |> should equal (Money.Dollar(10))
     fiveDollars.Times(3) |> should equal (Money.Dollar(15))
 
 [<Fact>]
-let ``Test Franc multiplication`` () =
+let ``multiply francs`` () =
     let fiveFrancs: Money = Money.Franc(5)
 
     fiveFrancs.Times(2) |> should equal (Money.Franc(10))
     fiveFrancs.Times(3) |> should equal (Money.Franc(15))
 
 [<Fact>]
-let ``Test equality`` () =
+let ``be able to compare between`` () =
     Money.Dollar(5) |> should equal (Money.Dollar(5))
     Money.Dollar(6) |> should not' (equal (Money.Dollar(5)))
     Money.Franc(5) |> should not' (equal (Money.Dollar(5)))
 
 [<Fact>]
-let ``Test currency`` () =
+let ``contain currency information`` () =
     Money.Dollar(1).Currency |> should equal "USD"
     Money.Franc(1).Currency |> should equal "CHF"
     
 [<Fact>]
-let ``Simple addition`` () =
+let ``support addition of money in the same currency`` () =
     let fiveDollars = Money.Dollar(5)
     let sum = fiveDollars.Plus(fiveDollars)
     let bank = Bank()
@@ -38,7 +38,7 @@ let ``Simple addition`` () =
     Money.Dollar(10) |> should equal reduced
     
 [<Fact>]
-let ``Plus returns sum`` () =
+let ``return sum of addition operation`` () =
     let fiveDollars = Money.Dollar(5)
     let result = fiveDollars.Plus(fiveDollars)
     let sum = result :?> Sum
@@ -46,31 +46,31 @@ let ``Plus returns sum`` () =
     fiveDollars |> should equal sum.Added
     
 [<Fact>]
-let ``Reduce sum`` () =
+let ``reduce sum`` () =
     let sum = Sum(Money.Dollar(3), Money.Dollar(4))
     let bank = Bank()
     let result = bank.Reduce(sum, "USD")
     Money.Dollar(7) |> should equal result
     
 [<Fact>]
-let ``Reduce money`` () =
+let ``reduce money`` () =
     let bank = Bank()
     let result = bank.Reduce(Money.Dollar(1), "USD")
     Money.Dollar(1) |> should equal result
 
 [<Fact>]    
-let ``Check identity rate`` () =
+let ``check identity rate`` () =
     Bank().Rate("USD", "USD") |> should equal 1
     
 [<Fact>]
-let ``Reduce money in different currencies`` () =
+let ``reduce money in different currencies`` () =
     let bank = Bank()
     bank.AddRate("CHF", "USD", 2)
     let result = bank.Reduce(Money.Franc(2), "USD")
     Money.Dollar(1) |> should equal result
     
 [<Fact>]
-let ``test mixed addition`` () =
+let ``support addition of mixed currencies`` () =
     let fiveDollars = Money.Dollar(5)
     let tenFrancs = Money.Franc(10)
     let bank = Bank()
@@ -79,7 +79,7 @@ let ``test mixed addition`` () =
     Money.Dollar(10) |> should equal result
     
 [<Fact>]
-let ``test sum plus money`` () =
+let ``support sum with plus money operation`` () =
     let fiveDollars = Money.Dollar(5)
     let tenFrancs = Money.Franc(10)
     let bank = Bank()
@@ -89,7 +89,7 @@ let ``test sum plus money`` () =
     Money.Dollar(15) |> should equal result
 
 [<Fact>]
-let ``test sum times`` () =
+let ``support sum with times operation`` () =
     let fiveDollars = Money.Dollar(5)
     let tenFrancs = Money.Franc(10)
     let bank = Bank()
