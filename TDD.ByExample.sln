@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Money", "Money\Money.csproj
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Money.Tests", "Money.Tests\Money.Tests.fsproj", "{A03C29E2-127A-46CC-9CA2-6636AD6225F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bank.Api", "Bank.Api\Bank.Api.csproj", "{D5C0E287-0538-46DF-B626-3F050E5156DB}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Bank.Api.Tests", "Bank.Api.Tests\Bank.Api.Tests.fsproj", "{F0777A78-6083-4668-AD83-45D9D2AF8A57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{A03C29E2-127A-46CC-9CA2-6636AD6225F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A03C29E2-127A-46CC-9CA2-6636AD6225F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A03C29E2-127A-46CC-9CA2-6636AD6225F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5C0E287-0538-46DF-B626-3F050E5156DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5C0E287-0538-46DF-B626-3F050E5156DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5C0E287-0538-46DF-B626-3F050E5156DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5C0E287-0538-46DF-B626-3F050E5156DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0777A78-6083-4668-AD83-45D9D2AF8A57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0777A78-6083-4668-AD83-45D9D2AF8A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0777A78-6083-4668-AD83-45D9D2AF8A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0777A78-6083-4668-AD83-45D9D2AF8A57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
