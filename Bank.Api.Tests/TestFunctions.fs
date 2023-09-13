@@ -8,7 +8,7 @@ open Microsoft.AspNetCore.TestHost
 let getTestHost () =
     Bank.Api.Program.CreateHostBuilder([|  |])
 
-let sendRequest (request: HttpRequestMessage) =
+let callServerToCalulateSum (request: HttpRequestMessage) =
     let resp =
         task {
             use server = new TestServer(getTestHost())
